@@ -523,7 +523,7 @@ final class Image implements ImageInterface
     {
         try {
             $this->gmagick->rollImage($offset->getX(), $offset->getY());
-        } catch (\ImagickException $e) {
+        } catch (\GmagickException $e) {
             throw new RuntimeException(
                 'Roll operation failed', $e->getCode(), $e
             );
