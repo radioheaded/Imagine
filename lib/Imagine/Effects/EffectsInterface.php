@@ -66,4 +66,14 @@ interface EffectsInterface
      * @throws RuntimeException
      */
     public function sharpen();
+
+    /**
+     * @param float $radius
+     * @param float $sigma
+     *
+     * @return mixed
+     *
+     * @throws RuntimeException
+     */
+    public function blur($radius, $sigma);
 }
