@@ -180,11 +180,12 @@ interface ManipulatorInterface
     public function fill(FillInterface $fill);
 
     /**
-     * @param PointInterface $offset
+     * @param int $offsetX
+     * @param int $offsetY
      *
      * @return ManipulatorInterface
      */
-    public function roll(PointInterface $offset);
+    public function roll($offsetX, $offsetY);
 
     /**
      * @param float $degrees

@@ -541,10 +541,10 @@ final class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function roll(PointInterface $offset)
+    public function roll($offsetX, $offsetY)
     {
         try {
-            $this->imagick->rollImage($offset->getX(), $offset->getY());
+            $this->imagick->rollImage($offsetX, $offsetY);
         } catch (\ImagickException $e) {
             throw new RuntimeException(
                 'Roll operation failed', $e->getCode(), $e
