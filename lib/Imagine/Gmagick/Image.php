@@ -519,6 +519,38 @@ final class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
+    public function roll(PointInterface $offset)
+    {
+        try {
+            $this->gmagick->rollImage($offset->getX(), $offset->getY());
+        } catch (\ImagickException $e) {
+            throw new RuntimeException(
+                'Roll operation failed', $e->getCode(), $e
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function swirl($degrees)
+    {
+        try {
+            $this->gmagick->swirlImage($degrees);
+        } catch (\ImagickException $e) {
+            throw new RuntimeException(
+                'Swirl operation failed', $e->getCode(), $e
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function histogram()
     {
         $pixels = $this->gmagick->getimagehistogram();

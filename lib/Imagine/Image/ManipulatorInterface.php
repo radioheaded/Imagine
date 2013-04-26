@@ -178,4 +178,18 @@ interface ManipulatorInterface
      * @return ManipulatorInterface
      */
     public function fill(FillInterface $fill);
+
+    /**
+     * @param PointInterface $offset
+     *
+     * @return ManipulatorInterface
+     */
+    public function roll(PointInterface $offset);
+
+    /**
+     * @param float $degrees
+     *
+     * @return ManipulatorInterface
+     */
+    public function swirl($degrees);
 }
