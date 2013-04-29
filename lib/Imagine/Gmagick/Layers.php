@@ -64,16 +64,7 @@ class Layers extends AbstractLayers
      */
     public function join($topToBottom = false)
     {
-        foreach ($this->layers as $image) {
-            try {
-                $this->resource->addImage($image->getGmagick());
-            } catch (\GmagickException $e) {
-                throw new RuntimeException(
-                    'Failed to substitute layer', $e->getCode(), $e
-                );
-            }
-        }
-
+        $this->merge();
         $this->resource->resetIterator();
 
         return new Image($this->resource->appendImages($topToBottom));

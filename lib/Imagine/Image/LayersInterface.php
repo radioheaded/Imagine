@@ -30,6 +30,8 @@ interface LayersInterface extends \Iterator, \Countable, \ArrayAccess
 
     /**
      * @return ImageInterface
+     *
+     * @throws RuntimeException
      */
     public function join();
 
