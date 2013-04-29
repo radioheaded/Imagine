@@ -64,6 +64,8 @@ class Layers extends AbstractLayers
      */
     public function join($topToBottom = false)
     {
+        // Removes initial empty image
+        $this->remove(0);
         $this->merge();
         $this->resource->resetIterator();
 
