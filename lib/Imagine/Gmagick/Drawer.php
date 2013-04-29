@@ -377,4 +377,39 @@ final class Drawer implements DrawerInterface
         return $pixel;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function rectangle(Point $lowerLeft, Point $upperRight, Color $color, $fill = false, $thickness = 1)
+    {
+        try {
+            $pixel   = $this->getColor($color);
+            $draw = new \GmagickDraw();
+
+            $draw->setStrokeColor($pixel);
+            $draw->setStrokeWidth(max(1, (int) $thickness));
+
+            if ($fill) {
+                $draw->setFillColor($pixel);
+            } else {
+                $draw->setFillColor('transparent');
+            }
+
+            $draw->rectangle($lowerLeft->getX(), $lowerLeft->getY(), $upperRight->getX(), $upperRight->getY());
+
+            $this->gmagick->drawImage($draw);
+
+            $pixel->clear();
+            $pixel->destroy();
+
+            $draw->clear();
+            $draw->destroy();
+        } catch (\GmagickException $e) {
+            throw new RuntimeException(
+                'Draw rectangle operation failed', $e->getCode(), $e
+            );
+        }
+
+        return $this;
+    }
 }

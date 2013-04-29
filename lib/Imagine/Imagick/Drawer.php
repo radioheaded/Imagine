@@ -391,7 +391,7 @@ final class Drawer implements DrawerInterface
      *
      * @param Color $color
      *
-     * @return string
+     * @return \ImagickPixel|string
      */
     private function getColor(Color $color)
     {
@@ -403,5 +403,41 @@ final class Drawer implements DrawerInterface
         );
 
         return $pixel;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rectangle(Point $lowerLeft, Point $upperRight, Color $color, $fill = false, $thickness = 1)
+    {
+        try {
+            $pixel   = $this->getColor($color);
+            $draw = new \ImagickDraw();
+
+            $draw->setStrokeColor($pixel);
+            $draw->setStrokeWidth(max(1, (int) $thickness));
+
+            if ($fill) {
+                $draw->setFillColor($pixel);
+            } else {
+                $draw->setFillColor('transparent');
+            }
+
+            $draw->rectangle($lowerLeft->getX(), $lowerLeft->getY(), $upperRight->getX(), $upperRight->getY());
+
+            $this->imagick->drawImage($draw);
+
+            $pixel->clear();
+            $pixel->destroy();
+
+            $draw->clear();
+            $draw->destroy();
+        } catch (\ImagickException $e) {
+            throw new RuntimeException(
+                'Draw rectangle operation failed', $e->getCode(), $e
+            );
+        }
+
+        return $this;
     }
 }

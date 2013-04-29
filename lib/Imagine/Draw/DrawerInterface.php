@@ -14,6 +14,7 @@ namespace Imagine\Draw;
 use Imagine\Image\AbstractFont;
 use Imagine\Image\BoxInterface;
 use Imagine\Image\Color;
+use Imagine\Image\Point;
 use Imagine\Image\PointInterface;
 
 /**
@@ -144,4 +145,14 @@ interface DrawerInterface
      * @return DrawerInterface
      */
     public function text($string, AbstractFont $font, PointInterface $position, $angle = 0);
+
+    /**
+     * @param Point $lowerLeft
+     * @param Point $upperRight
+     * @param Color $color
+     * @param bool $fill
+     * @param int $thickness
+     * @return mixed
+     */
+    public function rectangle(Point $lowerLeft, Point $upperRight, Color $color, $fill = false, $thickness = 1);
 }
