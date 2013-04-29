@@ -408,7 +408,7 @@ final class Drawer implements DrawerInterface
     /**
      * {@inheritdoc}
      */
-    public function rectangle(Point $lowerLeft, Point $upperRight, Color $color, $fill = false, $thickness = 1)
+    public function rectangle(Point $topLeft, Point $bottomRight, Color $color, $fill = false, $thickness = 1)
     {
         try {
             $pixel   = $this->getColor($color);
@@ -423,7 +423,7 @@ final class Drawer implements DrawerInterface
                 $draw->setFillColor('transparent');
             }
 
-            $draw->rectangle($lowerLeft->getX(), $lowerLeft->getY(), $upperRight->getX(), $upperRight->getY());
+            $draw->rectangle($topLeft->getX(), $topLeft->getY(), $bottomRight->getX(), $bottomRight->getY());
 
             $this->imagick->drawImage($draw);
 

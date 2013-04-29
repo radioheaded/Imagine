@@ -147,12 +147,12 @@ interface DrawerInterface
     public function text($string, AbstractFont $font, PointInterface $position, $angle = 0);
 
     /**
-     * @param Point $lowerLeft
-     * @param Point $upperRight
+     * @param Point $topLeft
+     * @param Point $bottomRight
      * @param Color $color
      * @param bool $fill
      * @param int $thickness
      * @return mixed
      */
-    public function rectangle(Point $lowerLeft, Point $upperRight, Color $color, $fill = false, $thickness = 1);
+    public function rectangle(Point $topLeft, Point $bottomRight, Color $color, $fill = false, $thickness = 1);
 }
