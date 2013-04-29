@@ -29,6 +29,11 @@ interface LayersInterface extends \Iterator, \Countable, \ArrayAccess
     public function merge();
 
     /**
+     * @return ImageInterface
+     */
+    public function join();
+
+    /**
      * Animates layers
      *
      * @param string  $format The output output format

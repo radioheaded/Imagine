@@ -62,6 +62,26 @@ class Layers extends AbstractLayers
     /**
      * {@inheritdoc}
      */
+    public function join($topToBottom = false)
+    {
+        foreach ($this->layers as $image) {
+            try {
+                $this->resource->addImage($image->getImagick());
+            } catch (\ImagickException $e) {
+                throw new RuntimeException(
+                    'Failed to join layers', $e->getCode(), $e
+                );
+            }
+        }
+
+        $this->resource->resetIterator();
+
+        return new Image($this->resource->appendImages($topToBottom));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function animate($format, $delay, $loops)
     {
         if ('gif' !== strtolower($format)) {

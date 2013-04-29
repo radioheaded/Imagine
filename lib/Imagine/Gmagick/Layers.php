@@ -62,6 +62,26 @@ class Layers extends AbstractLayers
     /**
      * {@inheritdoc}
      */
+    public function join($topToBottom = false)
+    {
+        foreach ($this->layers as $image) {
+            try {
+                $this->resource->addImage($image->getGmagick());
+            } catch (\GmagickException $e) {
+                throw new RuntimeException(
+                    'Failed to substitute layer', $e->getCode(), $e
+                );
+            }
+        }
+
+        $this->resource->resetIterator();
+
+        return new Image($this->resource->appendImages($topToBottom));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function coalesce()
     {
         throw new RuntimeException("Gmagick does not support coalescing");
